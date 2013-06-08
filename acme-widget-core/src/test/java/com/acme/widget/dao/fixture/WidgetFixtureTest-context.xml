@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:p="http://www.springframework.org/schema/p" xmlns:tx="http://www.springframework.org/schema/tx"
-	xmlns:jpa="http://www.springframework.org/schema/data/jpa" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xmlns:util="http://www.springframework.org/schema/util"
 	xsi:schemaLocation="
  	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
@@ -14,23 +15,9 @@
 	<import resource="property-beans.xml" />
 	<import resource="data-beans.xml" />
 
-	<!-- <context:component-scan base-package="com.acme.app.dao.jpa" /> -->
+	<!-- <context:component-scan base-package="com.acme.widget.dao.jpa" /> -->
 
-	<bean id="widget.abstract" class="com.acme.widget.domain.Widget"
-		abstract="true" />
-
-	<util:list id="widgets">
-		<bean parent="widget.abstract" p:name="widgetOne" />
-		<bean parent="widget.abstract" p:name="widgetTwo" />
-		<bean parent="widget.abstract" p:name="widgetThree" />
-	</util:list>
-
-	<bean id="whatsit.abstract" class="com.acme.widget.domain.Whatsit"
-		abstract="true" />
-
-	<util:list id="whatsits">
-		<bean parent="whatsit.abstract" p:name="whatsitOne" />
-		<bean parent="whatsit.abstract" p:name="whatsitTwo" />
-	</util:list>
+	<bean class="com.acme.widget.dao.fixture.WidgetFixture"
+		c:widgetCount="3" c:whatsitCount="2" init-method="fixture1" />
 
 </beans>
